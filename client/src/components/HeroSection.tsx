@@ -2,7 +2,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Search, Sparkles, TrendingUp, ArrowRight, Globe2, Zap } from 'lucide-react';
-import { MOCK_JOBS, MARKET_STATS } from '@/lib/data';
+import { MARKET_STATS } from '@/lib/data';
+import { useJSearchJobs } from '@/hooks/useJSearchJobs';
 
 interface HeroSectionProps {
   lang: 'en' | 'ko';
@@ -68,10 +69,10 @@ function SourceBadge({ source }: { source: string }) {
 export default function HeroSection({ lang }: HeroSectionProps) {
   const tx = t[lang];
   const [searchVal, setSearchVal] = useState('');
-  const [visibleJobs, setVisibleJobs] = useState(3);
   const [animatedStats, setAnimatedStats] = useState({ jobs: 0, growth: 0 });
   const statsRef = useRef<HTMLDivElement>(null);
-  const topJobs = MOCK_JOBS.slice(0, 4);
+  const { jobs: liveJobs, isLive } = useJSearchJobs('jobs in singapore');
+  const topJobs = liveJobs.slice(0, 4);
 
   // Animate stats on mount
   useEffect(() => {

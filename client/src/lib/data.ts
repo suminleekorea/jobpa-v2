@@ -15,6 +15,7 @@ export interface Job {
   industry: string;
   postedDate: string;
   description: string;
+  applyLink?: string;
 }
 
 export interface Consultant {
