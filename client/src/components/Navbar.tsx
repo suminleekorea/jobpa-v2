@@ -14,6 +14,7 @@ const t = {
     jobs: 'Job Search',
     consulting: 'Consulting',
     classes: 'Classes',
+    about: 'Our Story',
     cta: 'Get Started Free',
     feedback: 'Give Feedback',
   },
@@ -22,6 +23,7 @@ const t = {
     jobs: '공고 검색',
     consulting: '컨설팅',
     classes: '클래스',
+    about: '우리 이야기',
     cta: '무료로 시작하기',
     feedback: '피드백 남기기',
   },
@@ -67,6 +69,9 @@ export default function Navbar({ lang, onLangToggle }: NavbarProps) {
           <button onClick={() => scrollTo('classes')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             {tx.classes}
           </button>
+          <button onClick={() => scrollTo('about')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            {tx.about}
+          </button>
         </div>
 
         {/* Right Actions */}
@@ -111,6 +116,7 @@ export default function Navbar({ lang, onLangToggle }: NavbarProps) {
           <button onClick={() => scrollTo('jobs')} className="text-sm font-medium text-left py-2">{tx.jobs}</button>
           <button onClick={() => scrollTo('consulting')} className="text-sm font-medium text-left py-2">{tx.consulting}</button>
           <button onClick={() => scrollTo('classes')} className="text-sm font-medium text-left py-2">{tx.classes}</button>
+          <button onClick={() => scrollTo('about')} className="text-sm font-medium text-left py-2">{tx.about}</button>
           <div className="flex gap-2 pt-2">
             <Button variant="outline" size="sm" className="flex-1" onClick={onLangToggle}>
               <Globe className="w-3 h-3 mr-1" /> {lang === 'en' ? 'KO' : 'EN'}

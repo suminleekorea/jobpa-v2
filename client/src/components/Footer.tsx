@@ -8,8 +8,8 @@ interface FooterProps {
 }
 
 const GOOGLE_FORM_URL = 'https://forms.gle/ZxGFeRvE7qZ8yqVc9';
-// Embedded version: convert short URL to embed URL
-const GOOGLE_FORM_EMBED = 'https://docs.google.com/forms/d/e/1FAIpQLSfpv7v7qZ8yqVc9/viewform?embedded=true';
+// Correct embed URL (resolved from short URL redirect)
+const GOOGLE_FORM_EMBED = 'https://docs.google.com/forms/d/e/1FAIpQLSeKkL8jCE2kv6C1FSxUim2f8NphiinzXEwEbypneB3PJXaBog/viewform?embedded=true';
 
 const t = {
   en: {
@@ -197,7 +197,7 @@ export default function Footer({ lang }: FooterProps) {
           {/* Google Form iframe */}
           <div style={{ height: '480px' }} className="overflow-hidden">
             <iframe
-              src={`${GOOGLE_FORM_URL}?embedded=true`}
+              src={GOOGLE_FORM_EMBED}
               width="100%"
               height="480"
               frameBorder="0"

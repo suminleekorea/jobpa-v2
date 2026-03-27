@@ -1,7 +1,7 @@
 /* Home — JobPA v2 "Momentum" design
    Sections: Navbar → Hero (asymmetric split) → Features (widget grid)
-   → How It Works → Jobs (20 matched) → Consulting (Mentree-style)
-   → Classes → FAQ → Footer (CTA + Google Form feedback)
+   → How It Works → About (founder story) → Jobs (20 matched)
+   → Consulting (Mentree-style) → Classes → FAQ → Footer
 */
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
@@ -13,6 +13,7 @@ import ConsultingSection from '@/components/ConsultingSection';
 import ClassesSection from '@/components/ClassesSection';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
+import AboutSection from '@/components/AboutSection';
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'ko'>('en');
@@ -26,6 +27,7 @@ export default function Home() {
         <HeroSection lang={lang} />
         <FeaturesSection lang={lang} />
         <HowItWorksSection lang={lang} />
+        <AboutSection lang={lang} />
         <JobsSection lang={lang} />
         <ConsultingSection lang={lang} />
         <ClassesSection lang={lang} />
