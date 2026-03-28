@@ -16,7 +16,6 @@ import ConsultingSection from '@/components/ConsultingSection';
 import ClassesSection from '@/components/ClassesSection';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
-import AboutSection from '@/components/AboutSection';
 import TelegramAlertSection, { TelegramFloatingCTA } from '@/components/TelegramAlertSection';
 import LiveDemoSection from '@/components/LiveDemoSection';
 
@@ -48,7 +47,6 @@ export default function Home() {
         <LiveDemoSection lang={lang} />
         <FeaturesSection lang={lang} />
         <HowItWorksSection lang={lang} />
-        <AboutSection lang={lang} />
         <JobsSection lang={lang} searchQuery={searchQuery} />
         <TelegramAlertSection lang={lang} />
         <ConsultingSection lang={lang} />
