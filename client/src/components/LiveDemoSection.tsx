@@ -14,8 +14,8 @@ interface LiveDemoSectionProps {
 
 // Manus agent session links — update these with actual Manus prompt session URLs
 const DEMO_LINKS = {
-  jobSeeker: 'https://manus.im/share/jobpa-jd-analysis',
-  consultant: 'https://manus.im/share/jobpa-talent-intelligence',
+  jobSeeker: 'https://manus.im/share/5gFNUThvApmK28b741Yf8E',
+  consultant: 'https://manus.im/share/5gFNUThvApmK28b741Yf8E',
 };
 
 const t = {

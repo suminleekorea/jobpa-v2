@@ -1,7 +1,7 @@
 /* Footer + Feedback CTA + Google Form floating button */
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageSquarePlus, X, Briefcase, ExternalLink, Star } from 'lucide-react';
+import { MessageSquarePlus, X, Briefcase, ExternalLink, Star, Linkedin, Github } from 'lucide-react';
 
 interface FooterProps {
   lang: 'en' | 'ko';
@@ -13,6 +13,7 @@ const GOOGLE_FORM_EMBED = 'https://docs.google.com/forms/d/e/1FAIpQLSeKkL8jCE2kv
 
 const t = {
   en: {
+    shareLinkedIn: 'Share on LinkedIn',
     ctaTitle: 'Start Your Journey Today',
     ctaSub: 'Experience your personalized AI-powered career strategy for free.',
     ctaBtn: 'Get Started Free',
@@ -38,6 +39,7 @@ const t = {
     copyright: '© 2025 JobPA · Built with ❤️ for the Manus AI Hackathon, Singapore',
   },
   ko: {
+    shareLinkedIn: '링크드인 공유',
     ctaTitle: '지금 바로 시작하세요',
     ctaSub: '무료로 AI 맞춤 취업 전략을 경험해보세요.',
     ctaBtn: '무료로 시작하기',
@@ -85,13 +87,28 @@ export default function Footer({ lang }: FooterProps) {
             {tx.ctaTitle}
           </h2>
           <p className="text-indigo-200 mb-8 max-w-md mx-auto">{tx.ctaSub}</p>
-          <Button
-            size="lg"
-            className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold px-8 shadow-lg"
-            onClick={() => window.open('https://manus.im', '_blank')}
-          >
-            {tx.ctaBtn}
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Button
+              size="lg"
+              className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold px-8 shadow-lg"
+              onClick={() => window.open('https://manus.im', '_blank')}
+            >
+              {tx.ctaBtn}
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white/40 text-white hover:bg-white/10 font-semibold px-6 gap-2"
+              onClick={() => {
+                const text = encodeURIComponent('🚀 Just discovered JobPA — an AI-powered career strategy partner built for the Manus × Vibecoding Hackathon 2025 in Singapore!\n\nIt crawls MCF, LinkedIn & Indeed in real-time, scores your JD match, and predicts your interview probability. Built by @SuminLee 🇰🇷🇸🇬\n\n#JobPA #ManusAI #Hackathon #Singapore #CareerTech');
+                const url = encodeURIComponent('https://job-pa.manus.space');
+                window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`, '_blank');
+              }}
+            >
+              <Linkedin className="w-4 h-4" />
+              {tx.shareLinkedIn}
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -113,6 +130,14 @@ export default function Footer({ lang }: FooterProps) {
               <div className="flex items-center gap-1.5 mt-3">
                 <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                 <span className="text-xs text-amber-400 font-semibold">Manus AI Hackathon · Singapore 2025</span>
+              </div>
+              <div className="flex items-center gap-2 mt-3">
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fjob-pa.manus.space" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-400 transition-colors" aria-label="LinkedIn">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a href="https://github.com/suminleekorea/jobpa-v2" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors" aria-label="GitHub">
+                  <Github className="w-4 h-4" />
+                </a>
               </div>
             </div>
 

@@ -216,9 +216,13 @@ function JobCard({ job, tx, index }: { job: Job; tx: typeof t.en; index: number 
               size="sm"
               className="gradient-indigo text-white border-0 text-xs h-7 px-3"
               onClick={handleApply}
+              title={`Opens on ${job.sources[0] || 'employer website'}`}
             >
               <ExternalLink className="w-3 h-3 mr-1" />
               {tx.applyNow}
+              <span className="ml-1 opacity-70 text-[9px] font-normal hidden sm:inline">
+                via {job.sources[0] || 'MCF'}
+              </span>
             </Button>
             <button
               onClick={() => setExpanded(!expanded)}
@@ -265,6 +269,8 @@ export default function JobsSection({ lang, searchQuery = 'jobs in singapore' }:
 
   // Use live JSearch API — driven by searchQuery from hero search bar
   const { jobs, loading, isLive, refetch } = useJSearchJobs(searchQuery);
+  // Derive display query label for loading message
+  const queryLabel = searchQuery.replace(/ jobs in singapore/i, '').replace(/ in singapore/i, '').trim() || 'Singapore';
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -365,9 +371,13 @@ export default function JobsSection({ lang, searchQuery = 'jobs in singapore' }:
         {/* Loading state */}
         {loading ? (
           <div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-              <RefreshCw className="w-4 h-4 animate-spin text-indigo-500" />
-              {tx.loading}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-3">
+              <RefreshCw className="w-4 h-4 animate-spin text-indigo-500 flex-shrink-0" />
+              <span>
+                {lang === 'en'
+                  ? <>Crawling MCF, LinkedIn & Indeed for <strong className="text-indigo-700">"{queryLabel}"</strong> jobs in Singapore...</>
+                  : <><strong className="text-indigo-700">"{queryLabel}"</strong> 공고를 MCF, LinkedIn, Indeed에서 크롤링 중...</>}
+              </span>
             </div>
             <LoadingSkeleton />
           </div>

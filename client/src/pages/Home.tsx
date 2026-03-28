@@ -18,6 +18,7 @@ import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
 import TelegramAlertSection, { TelegramFloatingCTA } from '@/components/TelegramAlertSection';
 import LiveDemoSection from '@/components/LiveDemoSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'ko'>('en');
@@ -47,6 +48,7 @@ export default function Home() {
         <LiveDemoSection lang={lang} />
         <FeaturesSection lang={lang} />
         <HowItWorksSection lang={lang} />
+        <TestimonialsSection lang={lang} />
         <JobsSection lang={lang} searchQuery={searchQuery} />
         <TelegramAlertSection lang={lang} />
         <ConsultingSection lang={lang} />

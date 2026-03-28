@@ -1,7 +1,7 @@
 /* HeroSection — Momentum: asymmetric split, left copy + right live widget */
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Search, Sparkles, TrendingUp, ArrowRight, Globe2, Zap } from 'lucide-react';
+import { Search, Sparkles, TrendingUp, ArrowRight, Globe2, Zap, Info, ExternalLink } from 'lucide-react';
 import { MARKET_STATS } from '@/lib/data';
 import { useJSearchJobs } from '@/hooks/useJSearchJobs';
 
@@ -55,9 +55,17 @@ function InterviewProbBadge({ prob }: { prob: number }) {
   const cls = prob >= 75 ? 'probability-high' : prob >= 55 ? 'probability-mid' : 'probability-low';
   const dot = prob >= 75 ? 'bg-emerald-500' : prob >= 55 ? 'bg-amber-500' : 'bg-red-400';
   return (
-    <span className={`source-badge ${cls} text-xs font-semibold`}>
+    <span
+      className={`source-badge ${cls} text-xs font-semibold relative group/prob cursor-help`}
+      title="AI score based on: JD keyword match, required skills overlap, experience level fit, and location preference."
+    >
       <span className={`w-1.5 h-1.5 rounded-full ${dot} inline-block`} />
       {prob}%
+      {/* Tooltip */}
+      <span className="absolute bottom-full right-0 mb-1.5 w-52 bg-slate-900 text-white text-[10px] leading-relaxed rounded-lg px-2.5 py-2 opacity-0 group-hover/prob:opacity-100 pointer-events-none transition-opacity z-50 shadow-xl">
+        <strong className="block mb-0.5">Interview Probability</strong>
+        AI score based on JD keyword match, skills overlap, experience level, and location fit.
+      </span>
     </span>
   );
 }
@@ -180,7 +188,7 @@ export default function HeroSection({ lang, onSearch }: HeroSectionProps) {
           </div>
 
           {/* RIGHT: Live Job Widget */}
-          <div className="animate-slide-in-right" style={{ animationDelay: '0.2s' }}>
+          <div className="animate-slide-in-right lg:block" style={{ animationDelay: '0.2s' }}>
             <div className="bg-white rounded-2xl shadow-xl border border-border overflow-hidden">
               {/* Widget Header */}
               <div className="px-5 py-4 border-b border-border flex items-center justify-between bg-gradient-to-r from-indigo-600 to-indigo-700">
@@ -201,12 +209,28 @@ export default function HeroSection({ lang, onSearch }: HeroSectionProps) {
 
               {/* Job Cards */}
               <div className="divide-y divide-border">
+                {topJobs.length === 0 && ["","","",""].map((_, i) => (
+                  <div key={i} className="px-5 py-3.5 animate-pulse">
+                    <div className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-slate-200 flex-shrink-0" />
+                      <div className="flex-1 space-y-2">
+                        <div className="h-3.5 bg-slate-200 rounded w-3/4" />
+                        <div className="h-2.5 bg-slate-100 rounded w-1/2" />
+                        <div className="flex gap-2">
+                          <div className="h-4 bg-slate-100 rounded-full w-16" />
+                          <div className="h-4 bg-slate-100 rounded-full w-12" />
+                        </div>
+                      </div>
+                      <div className="h-5 bg-slate-200 rounded-full w-10 flex-shrink-0" />
+                    </div>
+                  </div>
+                ))}
                 {topJobs.map((job, i) => (
                   <div
                     key={job.id}
                     className="px-5 py-3.5 hover:bg-slate-50 transition-colors cursor-pointer"
                     style={{ animationDelay: `${0.3 + i * 0.1}s` }}
-                    onClick={() => document.getElementById('jobs')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => job.applyLink ? window.open(job.applyLink, '_blank') : document.getElementById('jobs')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     <div className="flex items-start gap-3">
                       {/* Company Logo */}
