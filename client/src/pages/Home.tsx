@@ -18,6 +18,7 @@ import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
 import AboutSection from '@/components/AboutSection';
 import TelegramAlertSection, { TelegramFloatingCTA } from '@/components/TelegramAlertSection';
+import LiveDemoSection from '@/components/LiveDemoSection';
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'ko'>('en');
@@ -44,6 +45,7 @@ export default function Home() {
       <Navbar lang={lang} onLangToggle={toggleLang} />
       <main>
         <HeroSection lang={lang} onSearch={handleSearch} />
+        <LiveDemoSection lang={lang} />
         <FeaturesSection lang={lang} />
         <HowItWorksSection lang={lang} />
         <AboutSection lang={lang} />

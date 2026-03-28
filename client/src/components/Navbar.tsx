@@ -11,21 +11,25 @@ interface NavbarProps {
 const t = {
   en: {
     features: 'Features',
+    demo: 'Live Demo',
     jobs: 'Job Search',
     consulting: 'Consulting',
     classes: 'Classes',
     about: 'Our Story',
     cta: 'Get Started Free',
     feedback: 'Give Feedback',
+    hackathon: '🏆 Hackathon 2025',
   },
   ko: {
     features: '기능',
+    demo: '라이브 데모',
     jobs: '공고 검색',
     consulting: '컨설팅',
     classes: '클래스',
     about: '우리 이야기',
     cta: '무료로 시작하기',
     feedback: '피드백 남기기',
+    hackathon: '🏆 해커톤 2025',
   },
 };
 
@@ -59,6 +63,10 @@ export default function Navbar({ lang, onLangToggle }: NavbarProps) {
         <div className="hidden md:flex items-center gap-6">
           <button onClick={() => scrollTo('features')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             {tx.features}
+          </button>
+          <button onClick={() => scrollTo('demo')} className="text-sm font-bold text-amber-600 hover:text-amber-700 transition-colors flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+            {tx.demo}
           </button>
           <button onClick={() => scrollTo('jobs')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             {tx.jobs}
@@ -113,6 +121,7 @@ export default function Navbar({ lang, onLangToggle }: NavbarProps) {
       {mobileOpen && (
         <div className="md:hidden bg-white border-t border-border px-4 py-4 flex flex-col gap-3">
           <button onClick={() => scrollTo('features')} className="text-sm font-medium text-left py-2">{tx.features}</button>
+          <button onClick={() => scrollTo('demo')} className="text-sm font-bold text-amber-600 text-left py-2 flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />{tx.demo}</button>
           <button onClick={() => scrollTo('jobs')} className="text-sm font-medium text-left py-2">{tx.jobs}</button>
           <button onClick={() => scrollTo('consulting')} className="text-sm font-medium text-left py-2">{tx.consulting}</button>
           <button onClick={() => scrollTo('classes')} className="text-sm font-medium text-left py-2">{tx.classes}</button>
