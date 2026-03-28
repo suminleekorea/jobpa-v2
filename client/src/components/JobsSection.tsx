@@ -14,6 +14,7 @@ import { useJSearchJobs } from '@/hooks/useJSearchJobs';
 
 interface JobsSectionProps {
   lang: 'en' | 'ko';
+  searchQuery?: string;
 }
 
 const t = {
@@ -255,15 +256,15 @@ function LoadingSkeleton() {
   );
 }
 
-export default function JobsSection({ lang }: JobsSectionProps) {
+export default function JobsSection({ lang, searchQuery = 'jobs in singapore' }: JobsSectionProps) {
   const tx = t[lang];
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState<'match' | 'salary' | 'prob'>('prob');
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  // Use live JSearch API
-  const { jobs, loading, isLive, refetch } = useJSearchJobs('jobs in singapore');
+  // Use live JSearch API — driven by searchQuery from hero search bar
+  const { jobs, loading, isLive, refetch } = useJSearchJobs(searchQuery);
 
   useEffect(() => {
     const obs = new IntersectionObserver(

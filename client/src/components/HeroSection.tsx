@@ -7,6 +7,7 @@ import { useJSearchJobs } from '@/hooks/useJSearchJobs';
 
 interface HeroSectionProps {
   lang: 'en' | 'ko';
+  onSearch?: (query: string) => void;
 }
 
 const t = {
@@ -66,7 +67,7 @@ function SourceBadge({ source }: { source: string }) {
   return <span className={`source-badge ${cls}`}>{source}</span>;
 }
 
-export default function HeroSection({ lang }: HeroSectionProps) {
+export default function HeroSection({ lang, onSearch }: HeroSectionProps) {
   const tx = t[lang];
   const [searchVal, setSearchVal] = useState('');
   const [animatedStats, setAnimatedStats] = useState({ jobs: 0, growth: 0 });
@@ -84,7 +85,11 @@ export default function HeroSection({ lang }: HeroSectionProps) {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    document.getElementById('jobs')?.scrollIntoView({ behavior: 'smooth' });
+    if (onSearch) {
+      onSearch(searchVal);
+    } else {
+      document.getElementById('jobs')?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -184,7 +189,9 @@ export default function HeroSection({ lang }: HeroSectionProps) {
                     <span className="text-white font-bold text-sm" style={{ fontFamily: 'Sora, sans-serif' }}>{tx.widgetTitle}</span>
                     <span className="bg-amber-400 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">{tx.liveTag}</span>
                   </div>
-                  <p className="text-indigo-200 text-xs mt-0.5">{tx.widgetSub}</p>
+                  <p className="text-indigo-200 text-xs mt-0.5">
+                    {searchVal ? `"${searchVal}" · Singapore` : tx.widgetSub}
+                  </p>
                 </div>
                 <div className="flex items-center gap-1 text-indigo-200 text-xs">
                   <Globe2 className="w-3.5 h-3.5" />
