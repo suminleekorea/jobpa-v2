@@ -1,7 +1,8 @@
 /* Footer + Feedback CTA + Google Form floating button */
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageSquarePlus, X, Briefcase, ExternalLink, Star, Linkedin, Github } from 'lucide-react';
+import { MessageSquarePlus, X, Briefcase, ExternalLink, Star, Linkedin, Github, LogIn } from 'lucide-react';
+import { getLoginUrl } from '@/const';
 
 interface FooterProps {
   lang: 'en' | 'ko';
@@ -90,9 +91,10 @@ export default function Footer({ lang }: FooterProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Button
               size="lg"
-              className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold px-8 shadow-lg"
-              onClick={() => window.open('https://manus.im', '_blank')}
+              className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold px-8 shadow-lg gap-2"
+              onClick={() => { window.location.href = getLoginUrl(); }}
             >
+              <LogIn className="w-4 h-4" />
               {tx.ctaBtn}
             </Button>
             <Button
@@ -157,13 +159,13 @@ export default function Footer({ lang }: FooterProps) {
               <h4 className="text-white font-semibold text-sm mb-3" style={{ fontFamily: 'Sora, sans-serif' }}>{tx.links.company}</h4>
               <ul className="flex flex-col gap-2 text-xs">
                 <li>
-                  <a href="https://manus.im" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
-                    {tx.links.about} <ExternalLink className="w-3 h-3" />
-                  </a>
+                  <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">
+                    {tx.links.about}
+                  </button>
                 </li>
                 <li>
-                  <a href="https://manus.im" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                    {tx.links.hackathon}
+                  <a href="https://github.com/suminleekorea/jobpa-v2" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
+                    {tx.links.hackathon} <ExternalLink className="w-3 h-3" />
                   </a>
                 </li>
               </ul>

@@ -201,11 +201,29 @@ export function useJSearchJobs(query: string = 'jobs in singapore'): UseJSearchJ
         },
       });
 
+      // Handle rate limit / quota exceeded gracefully
+      if (response.status === 429) {
+        console.warn('JSearch API quota exceeded — using curated demo data');
+        setJobs(MOCK_JOBS);
+        setIsLive(false);
+        setLoading(false);
+        return;
+      }
+
       if (!response.ok) {
         throw new Error(`API error: ${response.status}`);
       }
 
       const data = await response.json();
+
+      // Handle quota exceeded message in response body
+      if (data.message && data.message.toLowerCase().includes('quota')) {
+        console.warn('JSearch API quota exceeded — using curated demo data');
+        setJobs(MOCK_JOBS);
+        setIsLive(false);
+        setLoading(false);
+        return;
+      }
 
       if (data.status === 'OK' && Array.isArray(data.data) && data.data.length > 0) {
         // Map API jobs, sort by interview probability (highest first)
@@ -219,9 +237,6 @@ export function useJSearchJobs(query: string = 'jobs in singapore'): UseJSearchJ
         // Fallback to mock data
         setJobs(MOCK_JOBS);
         setIsLive(false);
-        if (data.message) {
-          setError(data.message);
-        }
       }
     } catch (err) {
       console.error('JSearch API error:', err);
